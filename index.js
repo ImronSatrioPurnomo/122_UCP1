@@ -15,3 +15,22 @@ db.sequelize.sync().then(() => {
 }).catch((error) => {
     console.log(error);
 })
+
+app.post('Tentrem', async (req, res) => {
+    const data = req.body;
+    try{
+        const Tentrem = await db.Tentrem.create(data);
+        res.send(Tentrem);
+    } catch (error){
+        res.send({message: error.message});
+    }
+    
+});
+
+app.get('/Tentrem', async (req, res) => {
+    try{
+        const Tentrem = await db.Tentrem.findAll();
+        res.send(Tentrem);
+    } catch (error){}
+    res.send({message: error.message});
+});
