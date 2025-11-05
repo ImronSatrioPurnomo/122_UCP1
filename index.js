@@ -34,3 +34,19 @@ app.get('/Tentrem', async (req, res) => {
     } catch (error){}
     res.send({message: error.message});
 });
+
+app.put('/Tentrem/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    try{
+        const Tentrem = await db.Tentrem.findByPk(id);
+        if (!Tentrem){
+            return res.status(404).send({message: 'data not found'});
+        }
+        await Tentrem.update(data);
+        res.send("data berhasil di upgrade", komik);
+    } catch (error){
+        res.send({message: error.message});
+    }
+});
+
