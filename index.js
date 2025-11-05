@@ -50,3 +50,17 @@ app.put('/Tentrem/:id', async (req, res) => {
     }
 });
 
+app.delete('/Tentrem/:id', async (req, res) => {
+    const id = req.params.id;
+    try{
+        const Tentrem = await db.Tentrem.findByPk(id);
+        if (!Tentrem){
+            return res.status(404).json({error: 'data not found'});
+        }
+        await Tentrem.destroy();
+        res.send({message: 'data berhasil dihapus'});
+    } catch (error){
+        res.status(500).json({error: 'failed to delete data'});
+    }
+    
+});
