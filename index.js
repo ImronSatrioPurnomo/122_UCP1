@@ -16,48 +16,48 @@ db.sequelize.sync().then(() => {
     console.log(error);
 })
 
-app.post('Tentrem', async (req, res) => {
+app.post('hotel', async (req, res) => {
     const data = req.body;
     try{
-        const Tentrem = await db.Tentrem.create(data);
-        res.send(Tentrem);
+        const hotel = await db.Tentrem.create(data);
+        res.send(hotel);
     } catch (error){
         res.send({message: error.message});
     }
     
 });
 
-app.get('/Tentrem', async (req, res) => {
+app.get('/hotel', async (req, res) => {
     try{
-        const Tentrem = await db.Tentrem.findAll();
-        res.send(Tentrem);
+        const hotel = await db.Tentrem.findAll();
+        res.send(hotel);
     } catch (error){}
     res.send({message: error.message});
 });
 
-app.put('/Tentrem/:id', async (req, res) => {
+app.put('/hotel/:id', async (req, res) => {
     const id = req.params.id;
     const data = req.body;
     try{
-        const Tentrem = await db.Tentrem.findByPk(id);
-        if (!Tentrem){
+        const hotel = await db.Tentrem.findByPk(id);
+        if (!hotel){
             return res.status(404).send({message: 'data not found'});
         }
-        await Tentrem.update(data);
-        res.send("data berhasil di upgrade", komik);
+        await hotel.update(data);
+        res.send("data berhasil di upgrade", hotel);
     } catch (error){
         res.send({message: error.message});
     }
 });
 
-app.delete('/Tentrem/:id', async (req, res) => {
+app.delete('/hotel/:id', async (req, res) => {
     const id = req.params.id;
     try{
-        const Tentrem = await db.Tentrem.findByPk(id);
-        if (!Tentrem){
+        const hotel = await db.Tentrem.findByPk(id);
+        if (!hotel){
             return res.status(404).json({error: 'data not found'});
         }
-        await Tentrem.destroy();
+        await hotel.destroy();
         res.send({message: 'data berhasil dihapus'});
     } catch (error){
         res.status(500).json({error: 'failed to delete data'});
