@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     Tanggal_Pesan: {
-      type: DataTypes.timestamps,
+      type: DateTypes.DATE,
       allowNull: false
     }
   }, {
